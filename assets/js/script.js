@@ -29,6 +29,7 @@ let imagesContainer = document.querySelector('.images-container');
 // Selettore thumbnails
 let thumbnailsContainer = document.querySelector('.thumbnails-container');
 
+populateCarousel(cardsArray);
 
 //Milestone 1:
 //Rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali 
@@ -36,31 +37,26 @@ let thumbnailsContainer = document.querySelector('.thumbnails-container');
 //Al click dell'utente sulle frecce verso alto o basso, 
 //l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
 
-
 // Funzione con FOR EACH per popolare dinamicamente il carosello con le immagini.
-cardsArray.forEach(function(card) {
-    //ho iterato tutte le chiavi e i valori degli object nell'array
-    //creo card principale con stringa presa da html pre compilato,
-    //inserisco valori iterati dal for each. (backtick)
-    const mainCard = `
-        <div class="image">
-            <img src="${card.image}">
-            <div class="content">
-                <h2>${card.title}e</h2>
-                <p>${card.text}</p>
-            </div>
-        </div>`;
-       
-         //attacco stringa html con valori for each a container del dom.
-         imagesContainer.innerHTML += mainCard;
+function populateCarousel(cardsArray) {
+    cardsArray.forEach(function(card) {
+        const mainCard = `
+            <div class="image">
+                <img src="${card.image}">
+                <div class="content">
+                    <h2>${card.title}</h2>
+                    <p>${card.text}</p>
+                </div>
+            </div>`;
+        imagesContainer.innerHTML += mainCard;
 
-    //stessa cosa fatta per card principale ripeto per thumbnails
-    const thumbnails = `   
-    <div class="thumbnail">
-        <img src="${card.image}">`;
-         thumbnailsContainer.innerHTML += thumbnails;
-    
-});
+        const thumbnails = `   
+            <div class="thumbnail">
+                <img src="${card.image}">
+            </div>`;
+        thumbnailsContainer.innerHTML += thumbnails;
+    });
+}
 
     let currentImageActive = 0;
     //seleziono tutte le immagini adesso con class .image
@@ -108,4 +104,3 @@ arrowNext.addEventListener('click', function() {
 });
 
 
-  
