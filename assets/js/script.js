@@ -1,24 +1,19 @@
 
-//Dato un array di oggetti letterali con:
-// - url dell’immagine
-// - titolo
-// - descrizione
-//Creare un carosello come nella foto allegata.
-
-//Milestone 0:
-//Creazione del markup statico:
-// costruiamo il container e inseriamo l'immagine grande 
-//in modo da poter stilare lo slider.
 
 //Milestone 1:
-//Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
-//Al click dell'utente sulle frecce verso alto o basso, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+//Ora rimuoviamo i contenuti statici 
+//e usiamo l’array di oggetti letterali per popolare dinamicamente
+// il carosello.
+
+//Al click dell'utente sulle frecce verso alto o basso,
+//l'immagine attiva diventerà visibile e 
+//dovremo aggiungervi titolo e testo.
 
 //Milestone 2:
 //Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura 
 //se l'utente clicca la freccia verso il basso.
 
-const images = [
+const cardsArray = [
     {
         image: './assets/img/01.webp',
         title: 'Marvel\'s Spiderman Miles Morale',
@@ -44,44 +39,53 @@ const images = [
 
 
 // Selettore container principale
-const imagesContainer = document.querySelector('.images-container');
+let imagesContainer = document.querySelector('.images-container');
 // Selettore thumbnails
-const thumbnailsContainer = document.querySelector('.thumbnails-container');
+let thumbnailsContainer = document.querySelector('.thumbnails-container');
 // Selettore arrow prev
 const arrowPrevious = document.querySelector('.arrow.previous');
 // Selettore arrow next
 const arrowNext = document.querySelector('.arrow.next');
 
 //indice immagini visualizzate,valore 0 che indica che inizialmente la prima immagine sarà visualizzata.
-let currentImageIndex = 0;
-
+//let currentImageActive = 0;
 
 
 //********** FUNCTIONS ***************/
 
 // Funzione con FOR EACH per popolare dinamicamente il carosello con le immagini.
 
-// function populateCarousel() {
-//     //Per ogni immagine nell'array creo elemento div per l'immagine.
-//     images.forEach((img, index) => {
-//         const imageDiv = document.createElement('div');
-//         imageDiv.classList.add('image');
-//         if (index === currentImageIndex) {
-//             imageDiv.classList.add('active');
-//         }
-//         //Creo elemento img da inserire nel div con all'interno immagine iterata dal ciclo.
-//         const imgElement = document.createElement('img');
-//         imgElement.src = img.image;
-//         imageDiv.appendChild(imgElement);
-//         imagesContainer.appendChild(imageDiv);
-        
-//         // Creiamo un elemento div per immagini in miniatura e gli assegniamo la classe 'thumbnail' (struttura miniatura nel css)
-//         const thumbnailDiv = document.createElement('div');
-//         thumbnailDiv.classList.add('thumbnail');
-//         thumbnailDiv.innerHTML = `<img class="img-fluid" src="${img.image}">`;
-//         thumbnailsContainer.appendChild(thumbnailDiv);
-        
-//     });
-// }
+cardsArray.forEach(function(card) {
+    //ho iterato tutte le chiavi e i valori degli object nell'array
+ 
+
+    //creo card principale con stringa presa da html pre compilato,
+    //inserisco valori iterati dal for each. (backtick)
+    const mainCard = `
+        <div class="image active">
+            <img src="${card.image}">
+            <div class="content">
+                <h2>${card.title}e</h2>
+                <p>${card.text}</p>
+            </div>
+        </div>`;
+       
+         //attacco stringa html con valori for each a container del dom.
+         imagesContainer.innerHTML += mainCard;
 
 
+         //stessa cosa fatta per card principale ripeto per thumbnails
+         const thumbnails = `
+         <div class="arrow previous">
+             <i class="fas fa-arrow-up"></i>
+         </div>
+         <div class="arrow next">
+             <i class="fas fa-arrow-down"></i>
+         </div>   
+         <div class="thumbnail">
+             <img src="${card.image}">
+         `;
+
+         thumbnailsContainer.innerHTML += thumbnails;
+     
+});
