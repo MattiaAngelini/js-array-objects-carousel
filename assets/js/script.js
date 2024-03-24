@@ -47,8 +47,6 @@ const arrowPrevious = document.querySelector('.arrow.previous');
 // Selettore arrow next
 const arrowNext = document.querySelector('.arrow.next');
 
-//indice immagini visualizzate,valore 0 che indica che inizialmente la prima immagine sarà visualizzata.
-//let currentImageActive = 0;
 
 
 //********** FUNCTIONS ***************/
@@ -62,7 +60,7 @@ cardsArray.forEach(function(card) {
     //creo card principale con stringa presa da html pre compilato,
     //inserisco valori iterati dal for each. (backtick)
     const mainCard = `
-        <div class="image active">
+        <div class="image">
             <img src="${card.image}">
             <div class="content">
                 <h2>${card.title}e</h2>
@@ -87,5 +85,14 @@ cardsArray.forEach(function(card) {
          `;
 
          thumbnailsContainer.innerHTML += thumbnails;
-     
 });
+
+//indice immagini visualizzate,valore 0 che indica che inizialmente la prima immagine sarà visualizzata.
+let currentImageActive = 0;
+
+
+//seleziono tutte le immagini adesso con class .image
+const allImages = document.querySelectorAll('.image')
+//alla lista di array nodi delle immagini, seleziono la prima e aggiungo la classe
+//con display block per attivarla
+allImages[currentImageActive].classList.add('active');
