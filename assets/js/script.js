@@ -57,39 +57,31 @@ let currentImageIndex = 0;
 
 
 
-
-
-
-
-
-
-
-
 //********** FUNCTIONS ***************/
 
 // Funzione con FOR EACH per popolare dinamicamente il carosello con le immagini.
 
-function populateCarousel() {
-    //Per ogni immagine nell'array creo elemento div per l'immagine.
-    images.forEach((img, index) => {
-        const imageDiv = document.createElement('div');
-        imageDiv.classList.add('image');
-        if (index === currentImageIndex) {
-            imageDiv.classList.add('active');
-        }
-        //Creo elemento img da inserire nel div con all'interno immagine iterata dal ciclo.
-        const imgElement = document.createElement('img');
-        imgElement.src = img.image;
-        imageDiv.appendChild(imgElement);
-        imagesContainer.appendChild(imageDiv);
+// function populateCarousel() {
+//     //Per ogni immagine nell'array creo elemento div per l'immagine.
+//     images.forEach((img, index) => {
+//         const imageDiv = document.createElement('div');
+//         imageDiv.classList.add('image');
+//         if (index === currentImageIndex) {
+//             imageDiv.classList.add('active');
+//         }
+//         //Creo elemento img da inserire nel div con all'interno immagine iterata dal ciclo.
+//         const imgElement = document.createElement('img');
+//         imgElement.src = img.image;
+//         imageDiv.appendChild(imgElement);
+//         imagesContainer.appendChild(imageDiv);
         
-        // Creiamo un elemento div per immagini in miniatura e gli assegniamo la classe 'thumbnail' (struttura miniatura nel css)
-        const thumbnailDiv = document.createElement('div');
-        thumbnailDiv.classList.add('thumbnail');
-        thumbnailDiv.innerHTML = `<img src="${img.image}">`;
-        thumbnailsContainer.appendChild(thumbnailDiv);
+//         // Creiamo un elemento div per immagini in miniatura e gli assegniamo la classe 'thumbnail' (struttura miniatura nel css)
+//         const thumbnailDiv = document.createElement('div');
+//         thumbnailDiv.classList.add('thumbnail');
+//         thumbnailDiv.innerHTML = `<img class="img-fluid" src="${img.image}">`;
+//         thumbnailsContainer.appendChild(thumbnailDiv);
         
-    });
-}
+//     });
+// }
 
-populateCarousel();
+
