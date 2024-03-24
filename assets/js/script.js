@@ -1,11 +1,4 @@
 
-//Al click dell'utente sulle frecce verso alto o basso,
-//l'immagine attiva diventerà visibile e 
-//dovremo aggiungervi titolo e testo.
-
-//Milestone 2:
-//Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura 
-//se l'utente clicca la freccia verso il basso.
 
 const cardsArray = [
     {
@@ -31,19 +24,20 @@ const cardsArray = [
     }
 ];
 
-
 // Selettore container principale
 let imagesContainer = document.querySelector('.images-container');
 // Selettore thumbnails
 let thumbnailsContainer = document.querySelector('.thumbnails-container');
 
-// Selettore arrow next
-//const arrowNext = document.querySelector('.arrow.next');
 
+//Milestone 1:
+//Rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali 
+//per popolare dinamicamente il carosello.
+//Al click dell'utente sulle frecce verso alto o basso, 
+//l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
 
 
 // Funzione con FOR EACH per popolare dinamicamente il carosello con le immagini.
-let currentImageActive = 0;
 cardsArray.forEach(function(card) {
     //ho iterato tutte le chiavi e i valori degli object nell'array
     //creo card principale con stringa presa da html pre compilato,
@@ -60,15 +54,15 @@ cardsArray.forEach(function(card) {
          //attacco stringa html con valori for each a container del dom.
          imagesContainer.innerHTML += mainCard;
 
-
     //stessa cosa fatta per card principale ripeto per thumbnails
     const thumbnails = `   
     <div class="thumbnail">
-        <img src="${card.image}">
-    `;
+        <img src="${card.image}">`;
          thumbnailsContainer.innerHTML += thumbnails;
     
+});
 
+    let currentImageActive = 0;
     //seleziono tutte le immagini adesso con class .image
     const allImages = document.querySelectorAll('.image')
     //alla lista di array nodi delle immagini, seleziono la prima e aggiungo la classe
@@ -79,18 +73,39 @@ cardsArray.forEach(function(card) {
     const allThumbnails = document.querySelectorAll('.thumbnail')
     allThumbnails[currentImageActive].classList.add('active');
 
-});
+
+    //Milestone 2:
+    //Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'
+    //utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa 
+    //per l'ultima miniatura se l'utente clicca la freccia verso il basso.
 
 
   // Selettore arrow prev
   const arrowPrevious = document.querySelector('.arrow.previous');
   arrowPrevious.addEventListener('click', function() {
-     alert('previous')
-   
- });
-   // Selettore arrow prev
-   const arrowNext = document.querySelector('.arrow.next');
-   arrowNext.addEventListener('click', function() {
-      alert('next')
-    
+      let imageActive = document.querySelector('.image.active');
+      imageActive.classList.remove('active');
+      //cambio immagine corrente al click (-1)
+      currentImageActive -= 1;
+      //e aggiungo condizione in cui ogni volta che l'immagine corrente è -1 
+      // viene riportata all'ultima immagine nell'array, creando effetto di loop nel carosello.
+      if (currentImageActive < 0) {
+          currentImageActive = allImages.length - 1; 
+      }
+      allImages[currentImageActive].classList.add('active');
   });
+
+  // Selettore arrow next - ripeto stesse operazioni del tasto previous (ma al contrario)
+const arrowNext = document.querySelector('.arrow.next');
+arrowNext.addEventListener('click', function() {
+    let imageActive = document.querySelector('.image.active');
+    imageActive.classList.remove('active');
+    currentImageActive += 1;
+    if (currentImageActive >= allImages.length) {
+        currentImageActive = 0; 
+    }
+    allImages[currentImageActive].classList.add('active');
+});
+
+
+  
