@@ -1,10 +1,4 @@
 
-
-//Milestone 1:
-//Ora rimuoviamo i contenuti statici 
-//e usiamo l’array di oggetti letterali per popolare dinamicamente
-// il carosello.
-
 //Al click dell'utente sulle frecce verso alto o basso,
 //l'immagine attiva diventerà visibile e 
 //dovremo aggiungervi titolo e testo.
@@ -42,21 +36,16 @@ const cardsArray = [
 let imagesContainer = document.querySelector('.images-container');
 // Selettore thumbnails
 let thumbnailsContainer = document.querySelector('.thumbnails-container');
-// Selettore arrow prev
-const arrowPrevious = document.querySelector('.arrow.previous');
+
 // Selettore arrow next
-const arrowNext = document.querySelector('.arrow.next');
+//const arrowNext = document.querySelector('.arrow.next');
 
 
-
-//********** FUNCTIONS ***************/
 
 // Funzione con FOR EACH per popolare dinamicamente il carosello con le immagini.
-
+let currentImageActive = 0;
 cardsArray.forEach(function(card) {
     //ho iterato tutte le chiavi e i valori degli object nell'array
- 
-
     //creo card principale con stringa presa da html pre compilato,
     //inserisco valori iterati dal for each. (backtick)
     const mainCard = `
@@ -72,33 +61,36 @@ cardsArray.forEach(function(card) {
          imagesContainer.innerHTML += mainCard;
 
 
-         //stessa cosa fatta per card principale ripeto per thumbnails
-         const thumbnails = `
-         <div class="arrow previous">
-             <i class="fas fa-arrow-up"></i>
-         </div>
-         <div class="arrow next">
-             <i class="fas fa-arrow-down"></i>
-         </div>   
-         <div class="thumbnail">
-             <img src="${card.image}">
-         `;
-
+    //stessa cosa fatta per card principale ripeto per thumbnails
+    const thumbnails = `   
+    <div class="thumbnail">
+        <img src="${card.image}">
+    `;
          thumbnailsContainer.innerHTML += thumbnails;
+    
+
+    //seleziono tutte le immagini adesso con class .image
+    const allImages = document.querySelectorAll('.image')
+    //alla lista di array nodi delle immagini, seleziono la prima e aggiungo la classe
+    //con display block per attivarla
+    allImages[currentImageActive].classList.add('active');
+
+    //stessa cosa fatta per card principale ripeto per thumbnails
+    const allThumbnails = document.querySelectorAll('.thumbnail')
+    allThumbnails[currentImageActive].classList.add('active');
+
 });
 
-//indice immagini visualizzate,valore 0 che indica che inizialmente la prima immagine sarà visualizzata.
-let currentImageActive = 0;
 
-
-//seleziono tutte le immagini adesso con class .image
-const allImages = document.querySelectorAll('.image')
-//alla lista di array nodi delle immagini, seleziono la prima e aggiungo la classe
-//con display block per attivarla
-allImages[currentImageActive].classList.add('active');
-
-
-//stessa cosa fatta per card principale ripeto per thumbnails
-const allThumbnails = document.querySelectorAll('.thumbnail')
-allThumbnails[currentImageActive].classList.add('active');
-
+  // Selettore arrow prev
+  const arrowPrevious = document.querySelector('.arrow.previous');
+  arrowPrevious.addEventListener('click', function() {
+     alert('previous')
+   
+ });
+   // Selettore arrow prev
+   const arrowNext = document.querySelector('.arrow.next');
+   arrowNext.addEventListener('click', function() {
+      alert('next')
+    
+  });
