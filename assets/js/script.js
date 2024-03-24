@@ -96,3 +96,9 @@ const allImages = document.querySelectorAll('.image')
 //alla lista di array nodi delle immagini, seleziono la prima e aggiungo la classe
 //con display block per attivarla
 allImages[currentImageActive].classList.add('active');
+
+
+//stessa cosa fatta per card principale ripeto per thumbnails
+const allThumbnails = document.querySelectorAll('.thumbnail')
+allThumbnails[currentImageActive].classList.add('active');
+
